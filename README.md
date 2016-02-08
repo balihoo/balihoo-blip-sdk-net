@@ -38,7 +38,7 @@ Ping the BLIP API.
       // Success!
     }
 ```
-
+---
 ### **GetBrandKeys**
 Get a list of brandKeys that the API user is authorized to access.
 
@@ -49,7 +49,7 @@ Get a list of brandKeys that the API user is authorized to access.
 
     var myBrandKeys = blipResponse.Body;
 ```
-
+---
 ### **GetBrandSources**
 Get a list of data sources available for an individual brand.
 
@@ -63,7 +63,7 @@ Get a list of data sources available for an individual brand.
 
     var sources = blipResponse.Body;
 ```
-
+---
 ### **GetBrandProjections**
 Get a list of data projections available for an individual brand.
 
@@ -77,7 +77,7 @@ Get a list of data projections available for an individual brand.
 
     var projections = blipResponse.Body;
 ```
-
+---
 ### **GetLocationKeys**
 Get a list of locationKeys for all locations belonging to the specified brand.
 
@@ -92,7 +92,7 @@ Get a list of locationKeys for all locations belonging to the specified brand.
 
     var locationKeys = blipResponse.Body;
 ```
-
+---
 ### **GetLocation**
 Get data for an individual location within the specified brand.
 
@@ -109,7 +109,7 @@ Get data for an individual location within the specified brand.
 
     var locationData = blipResponse.Body;
 ```
-
+---
 ### **QueryLocations**
 Get data for locations in a single brand filtered by the specified BLIP query.
 
@@ -126,7 +126,7 @@ Get data for locations in a single brand filtered by the specified BLIP query.
 
     var matchingLocations = blipResponse.Body;
 ```
-
+---
 ### **PutLocation**
 Add a new location or update an existing location's data.
 
@@ -147,7 +147,7 @@ Add a new location or update an existing location's data.
         // location was successfully added/updated
     }
 ```
-
+---
 ### **DeleteLocation**
 Delete an individual location.
 
