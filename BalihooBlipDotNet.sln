@@ -1,0 +1,28 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.24720.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BalihooBlipDotNet", "BalihooBlipDotNet\BalihooBlipDotNet.csproj", "{659FADDA-EC8D-4691-A40A-BC40F9266092}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BalihooBlipDotNetTests", "BalihooBlipDotNetTests\BalihooBlipDotNetTests.csproj", "{F7E68B2F-21E3-4A47-9A25-B8FB9328960A}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{659FADDA-EC8D-4691-A40A-BC40F9266092}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{659FADDA-EC8D-4691-A40A-BC40F9266092}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{659FADDA-EC8D-4691-A40A-BC40F9266092}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{659FADDA-EC8D-4691-A40A-BC40F9266092}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F7E68B2F-21E3-4A47-9A25-B8FB9328960A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F7E68B2F-21E3-4A47-9A25-B8FB9328960A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F7E68B2F-21E3-4A47-9A25-B8FB9328960A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F7E68B2F-21E3-4A47-9A25-B8FB9328960A}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
