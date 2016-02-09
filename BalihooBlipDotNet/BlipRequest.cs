@@ -42,6 +42,8 @@ namespace BalihooBlipDotNet
         /// <returns>A BlipResponse object.</returns>
         internal async Task<BlipResponse> ExecuteCommand(Command command, string path, string content=null)
         {
+            var encodedPath = Uri.EscapeUriString(path);
+
             using (var httpClient = new HttpClient())
             using (var client = ConfigureClient(httpClient))
             {
@@ -49,7 +51,7 @@ namespace BalihooBlipDotNet
                 {
                     case Command.Get:
                         {
-                            using (var response = await client.GetAsync(path))
+                            using (var response = await client.GetAsync(encodedPath))
                             {
                                 response.EnsureSuccessStatusCode();
                                 return await BuildResponse(response);
@@ -58,7 +60,7 @@ namespace BalihooBlipDotNet
                     case Command.Put:
                         {
                             using (var httpContent = new StringContent(content, Encoding.UTF8, "application/json"))
-                            using (var response = await client.PutAsync(path, httpContent))
+                            using (var response = await client.PutAsync(encodedPath, httpContent))
                             {
                                 response.EnsureSuccessStatusCode();
                                 return await BuildResponse(response);
@@ -68,7 +70,7 @@ namespace BalihooBlipDotNet
                         {
                             var httpContent = new StringContent(content, Encoding.UTF8, "application/json");
 
-                            using (var response = await client.PostAsync(path, httpContent))
+                            using (var response = await client.PostAsync(encodedPath, httpContent))
                             {
                                 response.EnsureSuccessStatusCode();
                                 return await BuildResponse(response);
@@ -76,7 +78,7 @@ namespace BalihooBlipDotNet
                         }
                     case Command.Delete:
                         {
-                            using (var response = await client.DeleteAsync(path))
+                            using (var response = await client.DeleteAsync(encodedPath))
                             {
                                 response.EnsureSuccessStatusCode();
                                 return await BuildResponse(response);

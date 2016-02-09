@@ -18,7 +18,7 @@ namespace BalihooBlipDotNet
         /// <param name="apiKey">The key used to access the BLIP API.</param>
         /// <param name="secretKey">The secret key used to access the BLIP API.</param>
         /// <param name="endpoint">The BLIP endpoint to target. Defaults to Balihoo's production environment.</param>
-        public Blip(string apiKey, string secretKey, string endpoint="https//blip.balihoo-cloud.com")
+        public Blip(string apiKey, string secretKey, string endpoint="https://blip.balihoo-cloud.com")
         {
             Credentials = Convert.ToBase64String(Encoding.ASCII.GetBytes($"{apiKey}:{secretKey}"));
             Endpoint = endpoint.TrimEnd('/');
@@ -56,7 +56,7 @@ namespace BalihooBlipDotNet
             var path = $"/brand/{brandKey}/source";
             var request = new BlipRequest(Credentials, Endpoint);
 
-            return request.ExecuteCommand(BlipRequest.Command.Get, Uri.EscapeUriString(path));
+            return request.ExecuteCommand(BlipRequest.Command.Get, path);
         }
 
         /// <summary>
@@ -69,7 +69,7 @@ namespace BalihooBlipDotNet
             var path = $"/brand/{brandKey}/projection";
             var request = new BlipRequest(Credentials, Endpoint);
 
-            return request.ExecuteCommand(BlipRequest.Command.Get, Uri.EscapeUriString(path));
+            return request.ExecuteCommand(BlipRequest.Command.Get, path);
         }
 
         /// <summary>
@@ -80,12 +80,10 @@ namespace BalihooBlipDotNet
         /// <returns>BlipResponse object with a status code and body text if applicable.</returns>
         public Task<BlipResponse> GetLocationKeys(string brandKey, string projection="universal")
         {
-            var path = $"/brand/{brandKey}/location";
-            var param = $"?projection={projection}";
-            var encodedPathAndParam = Uri.EscapeUriString($"{path}{param}");
+            var path = $"/brand/{brandKey}/location?projection={projection}";
             var request = new BlipRequest(Credentials, Endpoint);
 
-            return request.ExecuteCommand(BlipRequest.Command.Get, encodedPathAndParam);
+            return request.ExecuteCommand(BlipRequest.Command.Get, path);
         }
 
         /// <summary>
@@ -98,12 +96,10 @@ namespace BalihooBlipDotNet
         /// <returns>BlipResponse object with a status code and body text if applicable.</returns>
         public Task<BlipResponse> GetLocation(string brandKey, string locationKey, string projection="universal", bool includeRefs=false)
         {
-            var path = $"/brand/{brandKey}/location/{locationKey}";
-            var param = $"?projection={projection}&includeRefs={includeRefs.ToString().ToLower()}";
-            var encodedPathAndParam = Uri.EscapeUriString($"{path}{param}");
+            var path = $"/brand/{brandKey}/location/{locationKey}?projection={projection}&includeRefs={includeRefs.ToString().ToLower()}";
             var request = new BlipRequest(Credentials, Endpoint);
 
-            return request.ExecuteCommand(BlipRequest.Command.Get, encodedPathAndParam);
+            return request.ExecuteCommand(BlipRequest.Command.Get, path);
         }
 
         /// <summary>
@@ -119,7 +115,7 @@ namespace BalihooBlipDotNet
             var queryParam = $"{{\"query\": {query}, \"view\": \"{view}\"}}";
             var request = new BlipRequest(Credentials, Endpoint);
 
-            return request.ExecuteCommand(BlipRequest.Command.Post, Uri.EscapeUriString(path), queryParam);
+            return request.ExecuteCommand(BlipRequest.Command.Post, path, queryParam);
         }
 
         /// <summary>
@@ -132,12 +128,10 @@ namespace BalihooBlipDotNet
         /// <returns>BlipResponse object with a status code and body text if applicable.</returns>
         public Task<BlipResponse> PutLocation(string brandKey, string locationKey, string source, string locationData)
         {
-            var path = $"/brand/{brandKey}/location/{locationKey}";
-            var param = $"?source={source}";
-            var encodedPathAndParam = Uri.EscapeUriString($"{path}{param}");
+            var path = $"/brand/{brandKey}/location/{locationKey}?source={source}";
             var request = new BlipRequest(Credentials, Endpoint);
 
-            return request.ExecuteCommand(BlipRequest.Command.Put, encodedPathAndParam, locationData);
+            return request.ExecuteCommand(BlipRequest.Command.Put, path, locationData);
         }
 
         /// <summary>
@@ -149,12 +143,10 @@ namespace BalihooBlipDotNet
         /// <returns>BlipResponse object with a status code and body text if applicable.</returns>
         public Task<BlipResponse> DeleteLocation(string brandKey, string locationKey, string source)
         {
-            var path = $"/brand/{brandKey}/location/{locationKey}";
-            var param = $"?source={source}";
-            var encodedPathAndParam = Uri.EscapeUriString($"{path}{param}");
+            var path = $"/brand/{brandKey}/location/{locationKey}?source={source}";
             var request = new BlipRequest(Credentials, Endpoint);
 
-            return request.ExecuteCommand(BlipRequest.Command.Delete, encodedPathAndParam);
+            return request.ExecuteCommand(BlipRequest.Command.Delete, path);
         }
     }
 }
