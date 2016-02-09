@@ -68,8 +68,7 @@ namespace BalihooBlipDotNet
                         }
                     case Command.Post:
                         {
-                            var httpContent = new StringContent(content, Encoding.UTF8, "application/json");
-
+                            using (var httpContent = new StringContent(content, Encoding.UTF8, "application/json"))
                             using (var response = await client.PostAsync(encodedPath, httpContent))
                             {
                                 response.EnsureSuccessStatusCode();
