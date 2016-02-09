@@ -17,8 +17,8 @@ namespace BalihooBlipDotNet
         /// </summary>
         /// <param name="apiKey">The key used to access the BLIP API.</param>
         /// <param name="secretKey">The secret key used to access the BLIP API.</param>
-        /// <param name="endpoint">The BLIP endpoint to target. Defaults to Balihoo's dev environment.</param>
-        public Blip(string apiKey, string secretKey, string endpoint="https//blip.dev.balihoo-cloud.com")
+        /// <param name="endpoint">The BLIP endpoint to target. Defaults to Balihoo's production environment.</param>
+        public Blip(string apiKey, string secretKey, string endpoint="https//blip.balihoo-cloud.com")
         {
             Credentials = Convert.ToBase64String(Encoding.ASCII.GetBytes($"{apiKey}:{secretKey}"));
             Endpoint = endpoint.TrimEnd('/');
