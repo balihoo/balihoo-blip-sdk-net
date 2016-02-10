@@ -8,7 +8,7 @@ A .NET SDK for interacting with the Balihoo location information platform (BLIP)
 ## Usage
 ```csharp
     var blip = new Blip("<Your API Key>", "<Your Secret Key>");
-    var brandResponse = blip.getBrands();
+    var brandResponse = blip.getBrandKeys();
 
     // Status Code (e.g. 200, 204, 404, etc.)
     var responseCode = brandResponse.StatusCode;
