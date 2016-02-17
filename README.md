@@ -1,5 +1,5 @@
 # BLIP .NET SDK
-A .NET SDK for interacting with the Balihoo location information platform (BLIP).
+A .NET SDK for interacting with the Balihoo Local Information Platform (BLIP).
 
 ## Requirements
 - The BLIP .NET SDK targets version 4.5.2 of the .NET Framework.
