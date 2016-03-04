@@ -166,3 +166,41 @@ Delete an individual location.
         // location was successfully deleted
     }
 ```
+---
+### **BulkLoad**
+Load a single file containing multiple locations.
+ 
+#### Parameters
+- brandKey: The unique identifier for a single brand.
+- source: The unique identifier for the data source being used to add/update the location.
+- filePath: The full path to the bulk location file. See note below on the bulk load file format.
+- implicitDelete: Whether or not to delete locations from BLIP if they're missing from the file.
+- expectedRecordCount: The number of location records to expect in the file.
+- successEmail: An optional email address to notify upon success. Can be a comma-delimited list. Defaults to null.
+- failEmail: An optional email address to notify upon failure. Can be a comma-delimited list. Defaults to null.
+- successCallbackUrl: An optional URL to call upon success. Defaults to null.
+- failCallbackUrl: An optional URL to call upon failure. Defaults to null.
+
+#### Example
+```csharp
+    Blip blip = new Blip("<Your API Key>", "<Your Secret Key>");
+    BlipResponse blipResponse = blip.BulkLoad("mybrand", "mysource", "/tmp/myfile.json", true, 50, 
+                                              "success@mycompany.com", "error@mycompany.com,me@mycompany.com",
+                                              "http://mycompany.com/api?success=true", "http://mycompany.com/api?error=true");
+
+    if (blipResponse.STATUS_CODE == 204)
+    {
+        // File load has been successfully initiated.
+        // Optional success and failure notifications will be made once the load process completes.
+    }
+```
+
+#### Bulk Load File Format
+The file for the bulkLoad process should contain each location's data on a single line and each line delimited by a line-feed character (\n). If a location is omitted from the file and implicitDelete is set to true, the location will be deleted.
+
+##### Simplified Example
+```
+{"brandKey":"mybrand","locationKey":"ABC123","document":{...}}\n
+{"brandKey":"mybrand","locationKey":"ABC124","document":{...}}\n
+{"brandKey":"mybrand","locationKey":"ABC125","document":{...}}\n
+```

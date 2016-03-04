@@ -149,49 +149,83 @@ namespace BalihooBlipDotNet
             return request.ExecuteCommand(BlipRequest.Command.Delete, path).Result;
         }
 
+        /// <summary>
+        /// Load a bulk location file into BLIP.
+        /// </summary>
+        /// <param name="brandKey">The unique identifier for a single brand.</param>
+        /// <param name="source">The unique identifier for the data source.</param>
+        /// <param name="filePath">The full path to the bulk location file.</param>
+        /// <param name="implicitDelete">Whether or not to delete locations from BLIP if they're missing from the file.</param>
+        /// <param name="expectedRecordCount">The number of location records to expect in the file.</param>
+        /// <param name="successEmail">An optional email address to notify upon success. Can be a comma-delimited list.</param>
+        /// <param name="failEmail">An optional email address to notify upon failure. Can be a comma-delimited list.</param>
+        /// <param name="successCallbackUrl">An optional URL to call upon success.</param>
+        /// <param name="failCallbackUrl">An optional URL to call upon failure.</param>
+        /// <returns>BlipResponse object with a status code and body text if applicable.</returns>
         public BlipResponse BulkLoad(string brandKey, string source, string filePath, bool implicitDelete,
             int expectedRecordCount, string successEmail = null, string failEmail = null,
             string successCallbackUrl = null, string failCallbackUrl = null)
         {
-            // Use pre-seigned auth from BLIP to upload the file to S3
-            var blipRequest = new BlipRequest(Credentials, Endpoint);
-            var s3UploadResponse = new S3Request().Upload(blipRequest, brandKey, filePath);
-
-            if (s3UploadResponse.StatusCode != 204) return s3UploadResponse;
-
-            var path = $"/brand/{brandKey}/bulkLoad";
-            var s3Path = s3UploadResponse.Body;
-            path += $"s3Path={s3Path}&source={source}&implicitDelete={implicitDelete}&expectedRecordCount={expectedRecordCount}";
-
-            // Validate and add optional params
+            // Validate optional parameters
+            var optionalParams = "";
             if (!string.IsNullOrEmpty(successEmail))
             {
                 if (IsValidEmail(successEmail))
-                    path += $"&successEmail={successEmail}";
+                    optionalParams += $"&successEmail={successEmail}";
                 else
                     return new BlipResponse(400, $"Error: successEmail is not valid. {successEmail}");
-
+            }
+            if (!string.IsNullOrEmpty(failEmail))
+            {
                 if (IsValidEmail(failEmail))
-                    path += $"&failEmail={failEmail}";
+                    optionalParams += $"&failEmail={failEmail}";
                 else
                     return new BlipResponse(400, $"Error: failEmail is not valid. {failEmail}");
-
+            }
+            if (!string.IsNullOrEmpty(successCallbackUrl))
+            {
                 if (IsValidUrl(successCallbackUrl))
-                    path += $"&successCallbackUrl={successCallbackUrl}";
+                    optionalParams += $"&successCallback={successCallbackUrl}";
                 else
                     return new BlipResponse(400, $"Error: successCallbackUrl is not valid. {successCallbackUrl}");
-
+            }
+            if (!string.IsNullOrEmpty(failCallbackUrl))
+            {
                 if (IsValidUrl(failCallbackUrl))
-                    path += $"&failCallbackUrl={failCallbackUrl}";
+                    optionalParams += $"&failCallback={failCallbackUrl}";
                 else
                     return new BlipResponse(400, $"Error: failCallbackUrl is not valid. {failCallbackUrl}");
             }
-            return blipRequest.ExecuteCommand(BlipRequest.Command.Post, path).Result;
+
+            // Use pre-seigned auth from BLIP to upload the file to S3
+            var blipRequest = new BlipRequest(Credentials, Endpoint);
+            var s3UploadResponse = S3Request.Upload(blipRequest, brandKey, filePath);
+
+            // Return error response if S3 upload fails
+            if (s3UploadResponse.StatusCode != 204)
+            {
+                return s3UploadResponse;
+            }
+
+            // Build query string
+            var path = $"/brand/{brandKey}/bulkLoad?";
+            var s3Path = s3UploadResponse.Body;
+            var delete = implicitDelete.ToString().ToLower();
+            var count = expectedRecordCount.ToString();
+            path += $"s3Path={s3Path}&source={source}&implicitDelete={delete}&expectedRecordCount={count}";
+            if (!string.IsNullOrEmpty(optionalParams)) { path += optionalParams; }
+
+            // Ask BLIP to load the file from S3 and return its response (success of failure)
+            return blipRequest.ExecuteCommand(BlipRequest.Command.Get, path).Result;
         }
 
+        /// <summary>
+        /// Validate email address or comma delimited list of email addresses.
+        /// </summary>
+        /// <param name="email">The email address(es) to validate.</param>
+        /// <returns>Boolean validation response.</returns>
         private static bool IsValidEmail(string email)
         {
-            if (string.IsNullOrEmpty(email)) return false;
             try
             {
                 // Return false if any email address in the list is invalid. Otherwise return true.
@@ -206,11 +240,23 @@ namespace BalihooBlipDotNet
             }
         }
 
+        /// <summary>
+        /// Validate URL.
+        /// </summary>
+        /// <param name="url">The URL to validate.</param>
+        /// <returns>Boolean validation response.</returns>
         private static bool IsValidUrl(string url)
         {
-            Uri uriResult;
-            return Uri.TryCreate(url, UriKind.Absolute, out uriResult) 
-                && (uriResult.Scheme == Uri.UriSchemeHttp || uriResult.Scheme == Uri.UriSchemeHttps);
+            try
+            {
+                Uri uriResult;
+                return Uri.TryCreate(url, UriKind.Absolute, out uriResult)
+                    && (uriResult.Scheme == Uri.UriSchemeHttp || uriResult.Scheme == Uri.UriSchemeHttps);
+            }
+            catch
+            {
+                return false;
+            }
         }
     }
 }
