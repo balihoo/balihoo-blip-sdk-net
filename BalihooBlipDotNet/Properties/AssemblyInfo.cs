@@ -6,7 +6,7 @@ using System.Runtime.InteropServices;
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
 [assembly: AssemblyTitle("BalihooBlipDotNet")]
-[assembly: AssemblyDescription("")]
+[assembly: AssemblyDescription("A .NET SDK for interacting with the Balihoo Local Information Platform (BLIP).")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("Balihoo")]
 [assembly: AssemblyProduct("BalihooBlipDotNet")]
