@@ -7,7 +7,7 @@ A .NET SDK for interacting with the Balihoo Local Information Platform (BLIP).
 
 
 ## Installation
-The SDK is available as a [NuGet package|https://www.nuget.org/packages/BalihooBlipDotNet/].
+The SDK is available as a [NuGet package](https://www.nuget.org/packages/BalihooBlipDotNet/).
 To install BalihooBlipDotNet, run the following command in the Package Manager Console:
 ```powershell
 PM> Install-Package BalihooBlipDotNet
