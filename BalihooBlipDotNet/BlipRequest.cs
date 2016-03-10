@@ -108,7 +108,7 @@ namespace BalihooBlipDotNet
         /// </summary>
         /// <param name="response">The HTTPResponseMessage object to convert.</param>
         /// <returns>A BlipResponse object.</returns>
-        private async Task<BlipResponse> BuildResponse(HttpResponseMessage response)
+        private static async Task<BlipResponse> BuildResponse(HttpResponseMessage response)
         {
             var statusCode = (int)response.StatusCode;
             var body = await response.Content.ReadAsStringAsync();
