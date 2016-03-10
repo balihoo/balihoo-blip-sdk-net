@@ -5,6 +5,14 @@ A .NET SDK for interacting with the Balihoo Local Information Platform (BLIP).
 - The BLIP .NET SDK targets version 4.5.2 of the .NET Framework.
 - Using this SDK requires that you already have API keys and are interacting on behalf of a brand that already exists in Balihoo's system. Please contact Balihoo if you require API keys and/or would like to add a new brand to our system.
 
+
+## Installation
+The SDK is available as a [NuGet package](https://www.nuget.org/packages/BalihooBlipDotNet/).
+To install BalihooBlipDotNet, run the following command in the Package Manager Console:
+```powershell
+PM> Install-Package BalihooBlipDotNet
+```
+
 ## Usage
 ```csharp
     var blip = new Blip("<Your API Key>", "<Your Secret Key>");
