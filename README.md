@@ -127,6 +127,8 @@ Get data for locations in a single brand filtered by the specified BLIP query.
 - brandKey: The unique identifier for a single brand.
 - query: A stringified JSON query used to filter locations.
 - view: Optionally specify the view returned. Defaults to "full".
+- pageSize: Optionally specify the number of results to include in each page of results.
+- pageNumber: Optionally specify the page index to return.
 
 #### Example
 ```csharp

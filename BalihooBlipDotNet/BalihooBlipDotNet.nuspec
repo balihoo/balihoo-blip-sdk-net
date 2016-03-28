@@ -10,7 +10,7 @@
     <projectUrl>https://github.com/balihoo/balihoo-blip-sdk-net</projectUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>A .NET SDK for interacting with the Balihoo Local Information Platform (BLIP).</description>
-    <releaseNotes>Add BulkLoad support.</releaseNotes>
+    <releaseNotes>Add paging to LocationQuery().</releaseNotes>
     <copyright>Copyright 2016</copyright>
     <tags>Balihoo BLIP SDK</tags>
   </metadata>
