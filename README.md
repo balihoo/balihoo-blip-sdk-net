@@ -27,6 +27,15 @@ PM> Install-Package BalihooBlipDotNet
     var myBrands = brandResponse.Body;
 ```
 
+The Blip constructor has an optional "endpoint" parameter to specify the environment URL. The endpoint defaults to Balihoo's production environment but you can optionally pass the dev or stage URL.
+### Example
+```csharp
+	// dev: https://blip.dev.balihoo-cloud.com
+	// stage: https://blip.stage.balihoo-cloud.com
+	// production: https://blip.balihoo-cloud.com
+	var blip = new Blip("<Your API Key>", "<Your Secret Key>", "https://blip.dev.balihoo-cloud.com");
+```
+
 ## Methods
 All methods return a **BlipResponse** object with two properties:
 - **StatusCode**
