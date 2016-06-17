@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<package >
+  <metadata>
+    <id>$id$</id>
+    <version>$version$</version>
+    <title>$title$</title>
+    <authors>$author$</authors>
+    <owners>$author$</owners>
+    <licenseUrl>https://github.com/balihoo/balihoo-blip-sdk-net/blob/master/LICENSE</licenseUrl>
+    <projectUrl>https://github.com/balihoo/balihoo-blip-sdk-net</projectUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>A .NET SDK for interacting with the Balihoo Local Information Platform (BLIP).</description>
+    <releaseNotes>Add paging to LocationQuery().</releaseNotes>
+    <copyright>Copyright 2016</copyright>
+    <tags>Balihoo BLIP SDK</tags>
+  </metadata>
+</package>
