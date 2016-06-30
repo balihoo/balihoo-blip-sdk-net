@@ -162,7 +162,7 @@ Add a new location or update an existing location's data.
 #### Example
 ```csharp
     var blip = new Blip("<Your API Key>", "<Your Secret Key>");
-    var locationDocument = "{\"document\":{\"name\":\"Balihoo, Inc.\",\"address\":{\"city\":\"Boise\",\"state\":\"ID\"}}}";
+    var locationDocument = "{\"name\":\"Balihoo, Inc.\",\"address\":{\"city\":\"Boise\",\"state\":\"ID\"}}";
     var blipResponse = blip.PutLocation("mybrand", "mylocation", "mysource", locationDocument);
 
     if (blipResponse.StatusCode == 204)
