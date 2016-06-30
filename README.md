@@ -138,6 +138,8 @@ Get data for locations in a single brand filtered by the specified BLIP query.
 - view: Optionally specify the view returned. Defaults to "full".
 - pageSize: Optionally specify the number of results to include in each page of results.
 - pageNumber: Optionally specify the page index to return.
+- sortColumn: Optionally sort results by "name" or "locationKey". Defaults to "locationKey".
+- sortDirection: Optionally specify sorting "asc" or "desc". Defaults to "asc".
 
 #### Example
 ```csharp
