@@ -1,16 +1,16 @@
 <?xml version="1.0"?>
 <package >
   <metadata>
-    <id>$id$</id>
-    <version>$version$</version>
-    <title>$title$</title>
-    <authors>$author$</authors>
-    <owners>$author$</owners>
+    <id>BalihooBlipDotNet</id>
+    <version>1.7.0.0</version>
+    <title>Balihoo BLIP .NET SDK</title>
+    <authors>Balihoo</authors>
+    <owners>Balihoo</owners>
     <licenseUrl>https://github.com/balihoo/balihoo-blip-sdk-net/blob/master/LICENSE</licenseUrl>
     <projectUrl>https://github.com/balihoo/balihoo-blip-sdk-net</projectUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
-    <description>A .NET SDK for interacting with the Balihoo Local Information Platform (BLIP).</description>
-    <releaseNotes>Add paging to LocationQuery().</releaseNotes>
+    <description>An SDK for interacting with BLIP.</description>
+    <releaseNotes>Add sorting parameters to QueryLocations method.</releaseNotes>
     <copyright>Copyright 2016</copyright>
     <tags>Balihoo BLIP SDK</tags>
   </metadata>
