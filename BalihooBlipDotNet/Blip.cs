@@ -110,14 +110,19 @@ namespace BalihooBlipDotNet
         /// <param name="view">Optionally specify the view returned. Defaults to "full".</param>
         /// <param name="pageSize">Optionally specify the number of results to include in each page of results.</param>
         /// <param name="pageNumber">Optionally specify the page index to return.</param>
+        /// <param name="sortColumn">The column by which to sort results. ('name' or 'locationKey' -- defaults to 'locationKey').</param>
+        /// <param name="sortDirection">The direction to sort results. ('asc' or 'desc' -- defaults to 'asc').</param>
         /// <returns>BlipResponse object with a status code and body text if applicable.</returns>
-        public BlipResponse QueryLocations(string brandKey, string query, string view="full", int pageSize=0, int pageNumber=0)
+        public BlipResponse QueryLocations(string brandKey, string query, string view="full",
+            int pageSize=0, int pageNumber=0, string sortColumn="locationKey", string sortDirection="asc")
         {
             var path = $"/brand/{brandKey}/locationList";
             var queryParam = $"{{\"query\":{query},\"view\":\"{view}\"";
+
             if (pageSize > 0)
                 queryParam += $",\"pageSize\":{pageSize},\"pageNumber\":{pageNumber}";
-            queryParam += "}";
+
+            queryParam += $",\"sortColumn\":\"{sortColumn}\",\"sortDirection\":\"{sortDirection}\"}}";
             var request = new BlipRequest(Credentials, Endpoint);
 
             return request.ExecuteCommand(BlipRequest.Command.Post, path, queryParam).Result;
